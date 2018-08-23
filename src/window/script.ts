@@ -283,7 +283,8 @@ export class WindowType extends Vue {
         const footer = this.footerElement()
 
         const { width: windowWidth, height: windowHeight } = contentSize(window)
-        const titlebarHeight = contentSize(titlebar).height
+        // const titlebarHeight = contentSize(titlebar).height
+        const titlebarHeight = titlebar.offsetHeight
         const { width: contentWidth, height: contentHeight } = contentSize(content)
 
         let footerHeight = 0
@@ -292,15 +293,6 @@ export class WindowType extends Vue {
         const newContentWidth = windowWidth - (content.offsetWidth - contentWidth)
         const contentPlusFooterHeight = windowHeight - titlebarHeight - (content.offsetHeight - contentHeight)
         const newContentHeight = contentPlusFooterHeight - footerHeight
-
-        console.log({
-          windowHeight,
-          titlebarHeight,
-          contentHeight,
-          footerHeight,
-          'content-offsetHeight': content.offsetHeight,
-          newContentHeight
-        })
 
         content.style.width = `${newContentWidth}px`
         content.style.height = `${newContentHeight}px`
