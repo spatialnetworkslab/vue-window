@@ -293,6 +293,15 @@ export class WindowType extends Vue {
         const contentPlusFooterHeight = windowHeight - titlebarHeight - (content.offsetHeight - contentHeight)
         const newContentHeight = contentPlusFooterHeight - footerHeight
 
+        console.log({
+          windowHeight,
+          titlebarHeight,
+          contentHeight,
+          footerHeight,
+          'content-offsetHeight': content.offsetHeight,
+          newContentHeight
+        })
+
         content.style.width = `${newContentWidth}px`
         content.style.height = `${newContentHeight}px`
 
