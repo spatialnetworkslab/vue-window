@@ -8,7 +8,11 @@
                 :closeButton="true"
                 :isOpen.sync="isOpen"
                 :resizable="true"
-                overflow="hidden">
+                :collapseButton="true"
+                :isCollapsed.sync="isCollapsed"
+                :minWidth="100"
+                :minHeight="0"
+                @resize="resize">
                 Parameters:
                 <fieldset>
                     <legend>&alpha;</legend>
@@ -34,7 +38,8 @@
                 :closeButton="true"
                 :isOpen.sync="windows[i].isOpen"
                 :resizable="true"
-                overflow="hidden">
+                :isScrollable="true"
+                @resize="resize">
                 Parameters:
                 <fieldset>
                     <legend>&alpha;</legend>
@@ -45,10 +50,10 @@
                     <input type="range" />
                 </fieldset>
 
-                <div slot="footer">
-                  <button @click="removeWindow(i)">Close</button>
-                  <button @click="openAnotherWindow()">Open another window</button>
-                </div>
+                  <div slot="footer">
+                    <button @click="removeWindow(i)">Close</button>
+                    <button @click="openAnotherWindow()">Open another window</button>
+                  </div>
             </hsc-window>
 
         </hsc-window-style-metal>
@@ -62,6 +67,7 @@ export default <any>{
     data() {
         return {
             isOpen: true,
+            isCollapsed: false,
             windows: []
         }
     },
@@ -75,6 +81,10 @@ export default <any>{
         removeWindow(i = Number) {
             const self = <any>this
             self.windows.splice(i, 1)
+        },
+
+        resize(e = Event) {
+          console.log(e)
         }
     }
 }

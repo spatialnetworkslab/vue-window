@@ -54,7 +54,7 @@ export class WindowType extends Vue {
     @Prop({ type: Number, default: 0 })
     zGroup!: number
 
-    @Prop({ default: 'visible' })
+    @Prop({ default: 'hidden' })
     overflow!: string
 
     @Prop({ type: Boolean, default: false })
@@ -277,24 +277,35 @@ export class WindowType extends Vue {
     }
 
     private onWindowResize(emitUpdateEvent = true) {
-        const w = this.windowElement()
-        const t = this.titlebarElement()
-        const c = this.contentElement()
+        const window = this.windowElement()
+        const titlebar = this.titlebarElement()
+        const content = this.contentElement() // content is excluding the footer
+        const footer = this.footerElement()
 
-        const { width: cW0, height: cH0 } = contentSize(c)
-        const { width: wW, height: wH } = contentSize(w)
-        const tH = contentSize(t).height
+        const { width: windowWidth, height: windowHeight } = contentSize(window)
+        const titlebarHeight = contentSize(titlebar).height
+        const { width: contentWidth, height: contentHeight } = contentSize(content)
 
-        const cW1 = wW - (c.offsetWidth - cW0)
-        const cH1 = (wH - tH - (c.offsetHeight - cH0))
-        c.style.width = `${cW1}px`
-        c.style.height = `${cH1}px`
+        let footerHeight = 0
+        if (footer) { footerHeight = contentSize(footer).height }
+
+        const newContentWidth = windowWidth - (content.offsetWidth - contentWidth)
+
+        // 'contentPlusFooterHeight' will be the height that the user interacts
+        // with. the newContentHeight will be just used internally to set
+        // th content css
+        const contentPlusFooterHeight = windowHeight - titlebarHeight - (content.offsetHeight - contentHeight)
+        const newContentHeight = contentPlusFooterHeight - footerHeight
+
+        content.style.width = `${newContentWidth}px`
+        content.style.height = `${newContentHeight}px`
 
         fixPosition()
-        this.$emit('resize', new WindowResizeEvent(cW1, cH1))
+        this.$emit('resize', new WindowResizeEvent(newContentWidth, contentPlusFooterHeight))
+
         if (emitUpdateEvent) {
-            this.$emit('update:width', cW1)
-            this.$emit('update:height', cH1)
+            this.$emit('update:width', newContentWidth)
+            this.$emit('update:height', contentPlusFooterHeight)
         }
     }
 
