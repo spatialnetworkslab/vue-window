@@ -290,10 +290,6 @@ export class WindowType extends Vue {
         if (footer) { footerHeight = contentSize(footer).height }
 
         const newContentWidth = windowWidth - (content.offsetWidth - contentWidth)
-
-        // 'contentPlusFooterHeight' will be the height that the user interacts
-        // with. the newContentHeight will be just used internally to set
-        // th content css
         const contentPlusFooterHeight = windowHeight - titlebarHeight - (content.offsetHeight - contentHeight)
         const newContentHeight = contentPlusFooterHeight - footerHeight
 

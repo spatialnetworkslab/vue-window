@@ -5,11 +5,14 @@
             <div class="radial-gradient-1"></div>
         </hsc-window>
 
-        <hsc-window title="without max{Width,Height}" :resizable="true" :minWidth="200" :minHeight="200">
+        <hsc-window
+            title="without max{Width,Height}"
+            :resizable="true" :minWidth="200" :minHeight="0"
+            @resize="resize">
             <div class="radial-gradient-2"></div>
         </hsc-window>
 
-        <hsc-window title="width,height" :resizable="true" :width.sync="width" :height.sync="height" overflow="hidden">
+        <hsc-window title="width,height" :resizable="true" :width.sync="width" :height.sync="height">
             <div style="padding: 1em;">
                 <button>Cancel</button>
                 <button>OK</button>
@@ -25,7 +28,12 @@
             </p>
         </hsc-window>
 
-        <hsc-window title="Scrollable" :resizable="true" :isScrollable="true" :minWidth="100" :minHeight="100" :maxWidth="200" :maxHeight="200">
+        <hsc-window
+            title="Scrollable"
+            :resizable="true"
+            :isScrollable="true" :minWidth="100" :minHeight="0"
+            :maxWidth="200" :maxHeight="200"
+            @resize="resize">
             <table>
                 <tr>
                     <th>&times;</th>
@@ -100,6 +108,9 @@ export default <any>{
             if (hex.length <= 1)
                 hex = `0${hex}`
             return hex
+        },
+        resize(e: Event) {
+          console.log(e)
         }
     }
 }
