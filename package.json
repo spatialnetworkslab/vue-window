@@ -1,5 +1,5 @@
 {
-  "name": "@hscmap/vue-window",
+  "name": "vue-window",
   "version": "2.2.4",
   "description": "Vue component for window",
   "main": "./lib/index.js",
