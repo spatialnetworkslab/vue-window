@@ -9,7 +9,9 @@
             title="without max{Width,Height}"
             :resizable="true" :minWidth="200" :minHeight="0"
             @resizeStart="resizeStart"
-            @resizeEnd="resizeEnd">
+            @resizeEnd="resizeEnd"
+            @dragStart="dragStart"
+            @dragEnd="dragEnd">
             <div class="radial-gradient-2"></div>
         </hsc-window>
 
@@ -118,6 +120,12 @@ export default <any>{
         },
         resizeEnd() {
             console.log('resize end!')
+        },
+        dragStart() {
+            console.log('drag start!')
+        },
+        dragEnd() {
+            console.log('drag end!')
         }
     }
 }

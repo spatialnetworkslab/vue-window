@@ -178,7 +178,10 @@ export class WindowType extends Vue {
                     this.resizable && this.onWindowResize()
                 }
                 this.onWindowMove()
-                this.draggableHelper = new DraggableHelper(this.titlebarElement(), this.windowElement(), () => this.onWindowMove())
+                this.draggableHelper = new DraggableHelper(this.titlebarElement(),
+                    this.windowElement(), () => this.onWindowMove(),
+                    () => { this.$emit('dragStart') },
+                    () => { this.$emit('dragEnd') })
                 if (!this.isCollapsed) {
                     this.resizable && this.initResizeHelper()
                 }
