@@ -8,7 +8,8 @@
         <hsc-window
             title="without max{Width,Height}"
             :resizable="true" :minWidth="200" :minHeight="0"
-            @resize="resize">
+            @resizeStart="resizeStart"
+            @resizeEnd="resizeEnd">
             <div class="radial-gradient-2"></div>
         </hsc-window>
 
@@ -110,7 +111,13 @@ export default <any>{
             return hex
         },
         resize(e: Event) {
-          console.log(e)
+            console.log(e)
+        },
+        resizeStart() {
+            console.log('resize start!')
+        },
+        resizeEnd() {
+            console.log('resize end!')
         }
     }
 }

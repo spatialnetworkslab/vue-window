@@ -269,6 +269,8 @@ export class WindowType extends Vue {
         const { height: titlebarHeight } = naturalSize(this.titlebarElement())
         this.resizableHelper = new ResizableHelper(this.windowElement(), {
             onResize: () => this.onWindowResize(),
+            emitResizeStart: () => { this.$emit('resizeStart') },
+            emitResizeEnd: () => { this.$emit('resizeEnd') },
             minWidth: this.minWidth,
             minHeight: this.minHeight + titlebarHeight,
             maxWidth: this.maxWidth,

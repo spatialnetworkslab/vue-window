@@ -6,7 +6,9 @@ export interface Options {
     maxWidth?: number
     minHeight: number
     maxHeight?: number
-    onResize?: () => void
+    onResize?: () => void,
+    emitResizeStart?: () => void,
+    emitResizeEnd?: () => void
 }
 
 
@@ -72,6 +74,7 @@ abstract class HandleBase {
         this.width0 = width
         this.height0 = height
         this.calcSafeBoundaries()
+        this.helper.options.emitResizeStart && this.helper.options.emitResizeStart()
         document.addEventListener('mousemove', this.mousemove)
         document.addEventListener('mouseup', this.mouseup)
     }
@@ -142,6 +145,7 @@ abstract class HandleBase {
     private mouseup = (e: MouseEvent) => {
         e.preventDefault()
         e.stopPropagation()
+        this.helper.options.emitResizeEnd && this.helper.options.emitResizeEnd()
         document.removeEventListener('mousemove', this.mousemove)
         document.removeEventListener('mouseup', this.mouseup)
     }
