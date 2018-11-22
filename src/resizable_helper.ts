@@ -51,7 +51,9 @@ abstract class HandleBase {
 
     teardown() {
         this.handle.removeEventListener('mousedown', this.mousedown)
-        this.handle.parentElement!.removeChild(this.handle)
+        if (this.handle.parentElement) {
+          this.handle.parentElement!.removeChild(this.handle)
+        }
     }
 
     protected x0!: number
