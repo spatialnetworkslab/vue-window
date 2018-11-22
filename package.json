@@ -9,12 +9,12 @@
     "standalone/dist"
   ],
   "scripts": {
-    "prepare": "webpack --mode production ; npm run standalone",
+    "prepare": "webpack --mode production ; yarn run standalone",
     "watch": "webpack --mode development --watch",
     "example": "webpack --context example --config ./example/webpack.config.js --mode development",
     "example-server": "webpack-dev-server --hot --progress --context example --config ./example/webpack.config.js --mode development",
     "standalone": "webpack --context standalone --config ./standalone/webpack.config.js --mode production",
-    "gh-pages": "npm run example && npm run standalone && cp standalone/dist/vue-window-standalone.js example/dist && gh-pages -d example/dist"
+    "gh-pages": "yarn run example && yarn run standalone && cp standalone/dist/vue-window-standalone.js example/dist && gh-pages -d example/dist"
   },
   "dependencies": {
     "@hscmap/vue-menu": "^2.5.0",
