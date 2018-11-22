@@ -11,8 +11,8 @@ export function install(vue: typeof Vue, options = {
   prefix: 'hsc-window',
   zIndexBase: 0
 }) {
-    const { prefix } = options
-    BASE = options.zIndexBase
+    const prefix = options ? (options.prefix ? options.prefix : 'hsc-window') : 'hsc-window'
+    BASE = options ? (options.zIndexBase ? options.zIndexBase : 0) : 0
     vue.component(`${prefix}`, MyWindow)
     vue.component(`${prefix}-style-black`, StyleBlack)
     vue.component(`${prefix}-style-white`, StyleWhite)

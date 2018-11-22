@@ -54,7 +54,7 @@ export class WindowType extends Vue {
     @Prop({ type: Number, default: 0 })
     zGroup!: number
 
-    @Prop({ default: 'visible' })
+    @Prop({ default: 'hidden' })
     overflow!: string
 
     @Prop({ type: Boolean, default: false })
@@ -296,14 +296,16 @@ export class WindowType extends Vue {
 
         const cW1 = wW - (c.offsetWidth - cW0)
         const cH1 = (wH - tH - fH - (c.offsetHeight - cH0))
+
         c.style.width = `${cW1}px`
         c.style.height = `${cH1}px`
 
+
         fixPosition()
-        this.$emit('resize', new WindowResizeEvent(cW1, cH1))
+        this.$emit('resize', new WindowResizeEvent(cW1, cH1 + fH))
         if (emitUpdateEvent) {
             this.$emit('update:width', cW1)
-            this.$emit('update:height', cH1)
+            this.$emit('update:height', cH1 + fH)
         }
     }
 
